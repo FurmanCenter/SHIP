@@ -1,0 +1,274 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Azavea.Open.Reprojection</name>
+    </assembly>
+    <members>
+        <member name="T:Azavea.Open.Reprojection.GeoMath">
+            <summary>
+            A class full of static methods for doing geometry-related math.
+            </summary>
+        </member>
+        <member name="F:Azavea.Open.Reprojection.GeoMath.FEET_PER_METER">
+            <summary>
+            How many feet make up a meter.
+            </summary>
+        </member>
+        <member name="F:Azavea.Open.Reprojection.GeoMath.MILES_PER_METER">
+            <summary>
+            How many miles make up a meter.
+            </summary>
+        </member>
+        <member name="F:Azavea.Open.Reprojection.GeoMath.KM_PER_METER">
+            <summary>
+            How many kilometers make up a meter. (Yeah it's easy, but we've got
+            the other constants, so why not?)
+            </summary>
+        </member>
+        <member name="F:Azavea.Open.Reprojection.GeoMath.EARTH_RADIUS_AVERAGE_METERS">
+            <summary>
+            The approximate average radius of the Earth, in meters.
+            </summary>
+        </member>
+        <member name="F:Azavea.Open.Reprojection.GeoMath.EARTH_RADIUS_AT_EQUATOR_METERS">
+            <summary>
+            The radius of the earth at the equator.
+            </summary>
+        </member>
+        <member name="F:Azavea.Open.Reprojection.GeoMath.WGS84_ELLIPSOID_A">
+            <summary>
+            The "A" value for the WGS84 ellipsoid.
+            </summary>
+        </member>
+        <member name="F:Azavea.Open.Reprojection.GeoMath.WGS84_ELLIPSOID_B">
+            <summary>
+            The "B" value for the WGS84 ellipsoid.
+            </summary>
+        </member>
+        <member name="F:Azavea.Open.Reprojection.GeoMath.WGS84_ELLIPSOID_F">
+            <summary>
+            The "F" value for the WGS84 ellipsoid.
+            </summary>
+        </member>
+        <member name="M:Azavea.Open.Reprojection.GeoMath.ConvertToDegrees(System.Double)">
+            <summary>
+            Converts a value in radians into degrees.
+            </summary>
+            <param name="radians">A value in radians.</param>
+            <returns>The equivilent value in degrees.</returns>
+        </member>
+        <member name="M:Azavea.Open.Reprojection.GeoMath.ConvertToRadians(System.Double)">
+            <summary>
+            Converts a value in degrees into radians.
+            </summary>
+            <param name="degrees">A value in degrees.</param>
+            <returns>The equivilent value in radians.</returns>
+        </member>
+        <member name="M:Azavea.Open.Reprojection.GeoMath.HaversineDistanceMeters(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Uses the Haversine formula, assuming a spherical Earth, to calculate
+            distance (in meters) between two lat/lon points.
+            
+            Haversine is faster but less accurate than Vicenty.
+            
+            You may multiply the results by the handy constants MILES_PER_METER,
+            FEET_PER_METER, etc. to get the distance in those units instead.
+            </summary>
+            <param name="lon1">First point's longitude</param>
+            <param name="lat1">First point's latitude</param>
+            <param name="lon2">Second point's longitude</param>
+            <param name="lat2">Second point's latitude</param>
+            <returns>The distance between the two points, in meters.</returns>
+        </member>
+        <member name="M:Azavea.Open.Reprojection.GeoMath.HaversineDistanceMeters(GeoAPI.Geometries.ICoordinate,GeoAPI.Geometries.ICoordinate)">
+            <summary>
+            Uses the Haversine formula, assuming a spherical Earth, to calculate
+            distance (in meters) between two lat/lon coordinates.
+            
+            Haversine is faster but less accurate than Vicenty.
+            
+            You may multiply the results by the handy constants MILES_PER_METER,
+            FEET_PER_METER, etc. to get the distance in those units instead.
+            </summary>
+            <param name="coord1">First coordinate</param>
+            <param name="coord2">Second coordinate</param>
+            <returns>The distance between the two points, in meters.</returns>
+        </member>
+        <member name="M:Azavea.Open.Reprojection.GeoMath.HaversineDistanceMeters(GeoAPI.Geometries.IPoint,GeoAPI.Geometries.IPoint)">
+            <summary>
+            Uses the Haversine formula, assuming a spherical Earth, to calculate
+            distance (in meters) between two lat/lon points.
+            
+            Haversine is faster but less accurate than Vicenty.
+            
+            You may multiply the results by the handy constants MILES_PER_METER,
+            FEET_PER_METER, etc. to get the distance in those units instead.
+            </summary>
+            <param name="point1">First point</param>
+            <param name="point2">Second point</param>
+            <returns>The distance between the two points, in meters.</returns>
+        </member>
+        <member name="M:Azavea.Open.Reprojection.GeoMath.VicentyDistanceMeters(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Uses the Vicenty formula, assuming a ellopsoidal Earth, to calculate
+            distance (in meters) between two lat/lon points.
+            
+            Vicenty is slower but more accurate than Haversine.
+            
+            You may multiply the results by the handy constants MILES_PER_METER,
+            FEET_PER_METER, etc. to get the distance in those units instead.
+            </summary>
+            <param name="lon1">First point's longitude</param>
+            <param name="lat1">First point's latitude</param>
+            <param name="lon2">Second point's longitude</param>
+            <param name="lat2">Second point's latitude</param>
+            <returns>The distance between the two points, in meters.</returns>
+        </member>
+        <member name="M:Azavea.Open.Reprojection.GeoMath.VicentyDistanceMeters(GeoAPI.Geometries.ICoordinate,GeoAPI.Geometries.ICoordinate)">
+            <summary>
+            Uses the Vicenty formula, assuming a ellopsoidal Earth, to calculate
+            distance (in meters) between two lat/lon coordinates.
+            
+            Vicenty is slower but more accurate than Haversine.
+            
+            You may multiply the results by the handy constants MILES_PER_METER,
+            FEET_PER_METER, etc. to get the distance in those units instead.
+            </summary>
+            <param name="coord1">First coordinate</param>
+            <param name="coord2">Second coordinate</param>
+            <returns>The distance between the two points, in meters.</returns>
+        </member>
+        <member name="M:Azavea.Open.Reprojection.GeoMath.VicentyDistanceMeters(GeoAPI.Geometries.IPoint,GeoAPI.Geometries.IPoint)">
+            <summary>
+            Uses the Vicenty formula, assuming a ellopsoidal Earth, to calculate
+            distance (in meters) between two lat/lon points.
+            
+            Vicenty is slower but more accurate than Haversine.
+            
+            You may multiply the results by the handy constants MILES_PER_METER,
+            FEET_PER_METER, etc. to get the distance in those units instead.
+            </summary>
+            <param name="point1">First point</param>
+            <param name="point2">Second point</param>
+            <returns>The distance between the two points, in meters.</returns>
+        </member>
+        <member name="T:Azavea.Open.Reprojection.Reprojector">
+            <summary>
+            Static helper class for reprojecting points between various projection systems.
+            </summary>
+        </member>
+        <member name="F:Azavea.Open.Reprojection.Reprojector.PAStatePlane">
+            <summary>
+            Coordinate system for Pennsylvania State Plane South.
+            </summary>
+        </member>
+        <member name="F:Azavea.Open.Reprojection.Reprojector.WGS84">
+            <summary>
+            Coordinate system for WGS84 (most common lat/lon projection).
+            </summary>
+        </member>
+        <member name="F:Azavea.Open.Reprojection.Reprojector.NZGD2000">
+            <summary>
+            Coordinate system for New Zealand?.
+            </summary>
+        </member>
+        <member name="F:Azavea.Open.Reprojection.Reprojector.WebMercator">
+            <summary>
+            Coordinate system for Web Mercator.  This is not well defined, and needs a hack in the reprojector, but
+            we still want to have the CoordinateSystem around nominally, so it can be used in the standard way.
+            </summary>
+        </member>
+        <member name="M:Azavea.Open.Reprojection.Reprojector.Reproject(GeoAPI.CoordinateSystems.ICoordinateSystem,GeoAPI.CoordinateSystems.ICoordinateSystem,System.Double,System.Double)">
+            <summary>
+            Given a pair of coordinate systems, projects a point from one to another.
+            </summary>
+            <param name="from">The coordinate system from which to convert the point.</param>
+            <param name="to"></param>
+            <param name="xLon">The X or Longitude coordinate of the point to be reprojected</param>
+            <param name="yLat">The Y or Latitude coordinate of the point to be reprojected</param>
+            <returns>A new point, in the projection requested</returns>
+        </member>
+        <member name="M:Azavea.Open.Reprojection.Reprojector.Reproject(GeoAPI.CoordinateSystems.ICoordinateSystem,GeoAPI.CoordinateSystems.ICoordinateSystem,GeoAPI.Geometries.IPoint)">
+            <summary>
+            Given a couple coordinate systems, projects a point from one to another.
+            </summary>
+            <param name="from">The coordinate system which the point is in originally</param>
+            <param name="to">The coordinate system into which the point will be reprojected</param>
+            <param name="point">The point to be reprojected</param>
+            <returns>A new point, in the projection requested</returns>
+        </member>
+        <member name="M:Azavea.Open.Reprojection.Reprojector.ReprojectWGS84ToPAStatePlane(System.Double,System.Double)">
+            <summary>
+            Convert lat/long decimal degree coordinates (WGS84 datum) to X / Y coordinates in PA State Plane South projection (feet).
+            </summary>
+            <param name="lon">longitude in decimal degrees based on WGS84 horizontal datum</param>
+            <param name="lat">latitude in decimal degrees based on WGS84 horizontal datum</param>
+            <returns>A new point, in the PA State Plane coordinate system</returns>
+        </member>
+        <member name="M:Azavea.Open.Reprojection.Reprojector.ReprojectPAStatePlaneToWGS84(System.Double,System.Double)">
+            <summary>
+            Convert X / Y coordinates in PA State Plane South projection (feet) to lat/long decimal degree coordinates (WGS84 datum).
+            </summary>
+            <param name="x">x value in feet for PA State Plane South projection</param>
+            <param name="y">y value in feet for PA State Plane South projection</param>
+            <returns>A new point, in the WGS 84 coordinate system</returns>
+        </member>
+        <member name="M:Azavea.Open.Reprojection.Reprojector.ReprojectWGS84ToWebMercator(System.Double,System.Double)">
+            <summary>
+            Convert lat/long decimal degree coordinates (WGS84 datum) to X / Y coordinates in Web Mercator projection (meters).  Note that this is a manual re-projection and does not use PROJ.Net.
+            </summary>
+            <param name="lon">longitude in decimal degrees based on WGS84 horizontal datum</param>
+            <param name="lat">latitude in decimal degrees based on WGS84 horizontal datum</param>
+            <returns>A new point, in the Web Mercator coordinate system</returns>
+        </member>
+        <member name="M:Azavea.Open.Reprojection.Reprojector.ReprojectWebMercatorToWGS84(System.Double,System.Double)">
+            <summary>
+            Convert X / Y coordinates in Web Mercator projection (meters) to lat/long decimal degree coordinates (WGS84 datum).  Note that this is a manual re-projection and does not use PROJ.Net.
+            </summary>
+            <param name="x">x value in meters for Spherical Mercator projection</param>
+            <param name="y">y value in meters for Spherical Mercator projection</param>
+            <returns>A new point, in the WGS 84 coordinate system</returns>
+        </member>
+        <member name="M:Azavea.Open.Reprojection.Reprojector.GetCoordinateSystemBySRID(System.Int32)">
+            <summary>
+            Return a coordinate system object given a SRID.
+            </summary>
+            <param name="srid">Spatial Reference ID of the desired coordinate system</param>
+            <returns>The coordinate system with the SRID requested, if defined, or 
+            null if it is not defined</returns>
+        </member>
+        <member name="T:Azavea.Open.Reprojection.Tests.ReprojectorTests">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Open.Reprojection.Tests.ReprojectorTests.TestReprojectPAStatePlaneToWGS84">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Open.Reprojection.Tests.ReprojectorTests.TestReprojectPAStatePlaneToWGS84OldSignature">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Open.Reprojection.Tests.ReprojectorTests.TestReprojectWGS84ToPAStatePlane">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Open.Reprojection.Tests.ReprojectorTests.TestReprojectWGS84ToPAStatePlaneOldSignature">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Open.Reprojection.Tests.ReprojectorTests.TestReprojectNZGS2000ToWGS84">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Open.Reprojection.Tests.ReprojectorTests.TestReprojectWebMercatorToWGS84">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Open.Reprojection.Tests.ReprojectorTests.TestReprojectWGS84ToWebMercator">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Open.Reprojection.Tests.ReprojectorTests.TestReprojectWGS84AndWebMercatorLots">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Open.Reprojection.Tests.ReprojectorTests.TestBadReprojectWGS84ToWebMercator">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Open.Reprojection.Tests.ReprojectorTests.TestGetCoordinateSystemBySRID">
+            <exclude />
+        </member>
+    </members>
+</doc>

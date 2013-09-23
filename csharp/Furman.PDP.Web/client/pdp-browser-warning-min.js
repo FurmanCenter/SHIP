@@ -1,0 +1,1 @@
+$(document).ready(function(){var a='<div id="pdp-browser-warning">Your Internet browser may not work correctly with all functionality on this website.  Please consider upgrading to a more recent version.</div>';$("body").prepend(a)});

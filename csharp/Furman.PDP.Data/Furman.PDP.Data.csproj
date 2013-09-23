@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E17683CE-0F9E-4F46-9FD9-B3B18E8F9A44}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Furman.PDP.Data</RootNamespace>
+    <AssemblyName>Furman.PDP.Data</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Azavea.Database">
+      <HintPath>..\..\libs\Azavea.Database.dll</HintPath>
+    </Reference>
+    <Reference Include="Azavea.Open.Common">
+      <HintPath>..\..\libs\Azavea.Open.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Azavea.Open.DAO">
+      <HintPath>..\..\libs\Azavea.Open.DAO.dll</HintPath>
+    </Reference>
+    <Reference Include="Azavea.Open.DAO.CSV">
+      <HintPath>..\..\libs\Azavea.Open.DAO.CSV.dll</HintPath>
+    </Reference>
+    <Reference Include="Azavea.Open.DAO.OleDb">
+      <HintPath>..\..\libs\Azavea.Open.DAO.OleDb.dll</HintPath>
+    </Reference>
+    <Reference Include="Azavea.Open.DAO.SQLite">
+      <HintPath>..\..\libs\Azavea.Open.DAO.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="Azavea.Open.DAO.SQLServer">
+      <HintPath>..\..\libs\Azavea.Open.DAO.SQLServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Azavea.Open.Reprojection">
+      <HintPath>..\..\libs\Azavea.Open.Reprojection.dll</HintPath>
+    </Reference>
+    <Reference Include="Azavea.Utilities.Common">
+      <HintPath>..\..\libs\Azavea.Utilities.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Azavea.Utilities.GeoUtilities">
+      <HintPath>..\..\libs\Azavea.Utilities.GeoUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Azavea.Utilities.SystemMetrics">
+      <HintPath>..\..\libs\Azavea.Utilities.SystemMetrics.dll</HintPath>
+    </Reference>
+    <Reference Include="GeoAPI">
+      <HintPath>..\..\libs\GeoAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\libs\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="NetTopologySuite">
+      <HintPath>..\..\libs\NetTopologySuite.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\libs\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AbstractNamedSortable.cs" />
+    <Compile Include="AbstractSortable.cs" />
+    <Compile Include="MultipleColumnListComparer.cs" />
+    <Compile Include="MultipleDictionaryValueComparer.cs" />
+    <Compile Include="Nychanis\AbstractNycIndicator.cs" />
+    <Compile Include="Nychanis\NycResolutionForIndicator.cs" />
+    <Compile Include="Nychanis\NycGeogColumnMetadata.cs" />
+    <Compile Include="Nychanis\NycIndicatorCategory.cs" />
+    <Compile Include="Nychanis\NycIndicatorSubCategory.cs" />
+    <Compile Include="Nychanis\NycLayerInfo.cs" />
+    <Compile Include="Nychanis\NycLegendElement.cs" />
+    <Compile Include="Nychanis\NycLegendInfo.cs" />
+    <Compile Include="Nychanis\NycMapInfo.cs" />
+    <Compile Include="Nychanis\NycResultsWithMetadata.cs" />
+    <Compile Include="Nychanis\NycTableResults.cs" />
+    <Compile Include="Nychanis\NycTimeResolution.cs" />
+    <Compile Include="Nychanis\NycYearColumnMetadata.cs" />
+    <Compile Include="Nychanis\ThinNycGeography.cs" />
+    <Compile Include="Nychanis\NycDatum.cs" />
+    <Compile Include="Nychanis\NycGeography.cs" />
+    <Compile Include="Nychanis\NycBreakpointType.cs" />
+    <Compile Include="Nychanis\NychanisHelper.cs" />
+    <Compile Include="Nychanis\NycQueryMetadata.cs" />
+    <Compile Include="Nychanis\NycValueType.cs" />
+    <Compile Include="Nychanis\NycIndicator.cs" />
+    <Compile Include="Nychanis\NycResolution.cs" />
+    <Compile Include="Nychanis\NycResolutionType.cs" />
+    <Compile Include="Nychanis\NycTimeframe.cs" />
+    <Compile Include="Nychanis\NycTimeframeType.cs" />
+    <Compile Include="Nychanis\ThinNycIndicator.cs" />
+    <Compile Include="PDB\PdbCategory.cs" />
+    <Compile Include="PDB\PdbResultsWithMetadata.cs" />
+    <Compile Include="PDB\PdbSubCategory.cs" />
+    <Compile Include="AbstractTableColumnMetadata.cs" />
+    <Compile Include="ResultsWithMetadata.cs" />
+    <Compile Include="PDB\PdbCriteriaAttributeMetadata.cs" />
+    <Compile Include="PDB\PdbResultAttributeMetadata.cs" />
+    <Compile Include="Tests\RunOnceOnNewFileTests.cs" />
+    <Compile Include="Tests\PropertyLocationTests.cs" />
+    <Compile Include="Tests\NychanisSldTests.cs" />
+    <Compile Include="Tests\NychanisQueryTests.cs" />
+    <Compile Include="Tests\NychanisMetadataTests.cs" />
+    <Compile Include="Tests\UserTests.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="PDB\PdbAttributesHelper.cs" />
+    <Compile Include="PDB\PdbAttributeValue.cs" />
+    <Compile Include="PDB\PdbDifficulty.cs" />
+    <Compile Include="PDB\PdbEntityType.cs" />
+    <Compile Include="PDB\PdbUiType.cs" />
+    <Compile Include="PDB\PdbValueType.cs" />
+    <Compile Include="PDB\PdbSecondaryTableProperty.cs" />
+    <Compile Include="SecurityRole.cs" />
+    <Compile Include="PDB\PdbTwoTableHelper.cs" />
+    <Compile Include="PDB\PdbAttribute.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\AttributeTests.cs" />
+    <Compile Include="Tests\PropertyTests.cs" />
+    <Compile Include="UserHelper.cs" />
+    <Compile Include="UserResultMetadata.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Tests\SLD.config" />
+    <None Include="Tests\Pdb.config" />
+    <None Include="Tests\test.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Tests\NychanisMapping.xml" />
+    <Content Include="Tests\PdbMapping.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y "$(ProjectDir)\Tests\test.config" "$(TargetPath).config"</PostBuildEvent>
+  </PropertyGroup>
+</Project>

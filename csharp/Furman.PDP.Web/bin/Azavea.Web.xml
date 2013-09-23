@@ -1,0 +1,1584 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Azavea.Web</name>
+    </assembly>
+    <members>
+        <member name="T:Azavea.Web.Exceptions.AzaveaWebArgumentException">
+            <summary>
+            Throw this exception if the client passed bad or missing arguments.
+            
+            Will be returned as "BadRequest (400)".
+            </summary>
+        </member>
+        <member name="T:Azavea.Web.Exceptions.AzaveaWebException">
+            <summary>
+            Exceptions of this type are thrown to indicate specific errors we want 
+            communicated to the client.  
+            
+            This is intended to be used as a base class,
+            but if you have some one-off exception you want to throw with a particular
+            HTTP status code, you can use this.
+            
+            Generally you should use one of the exceptions that extends this one.
+            </summary>
+        </member>
+        <member name="F:Azavea.Web.Exceptions.AzaveaWebException.Code">
+            <summary>
+            The HTTP Status code (I.E. 200 = OK, 500 = internal server error, etc.)
+            </summary>
+        </member>
+        <member name="M:Azavea.Web.Exceptions.AzaveaWebException.#ctor(System.Net.HttpStatusCode,System.String)">
+            <summary>
+            Construct the exception without an inner exception.
+            </summary>
+            <param name="code">Http status code to return.</param>
+            <param name="message">Message you wish displayed to the client.</param>
+        </member>
+        <member name="M:Azavea.Web.Exceptions.AzaveaWebException.#ctor(System.Net.HttpStatusCode,System.String,System.Exception)">
+            <summary>
+            Construct the exception with an inner exception.
+            </summary>
+            <param name="code">Http status code to return.</param>
+            <param name="message">Message you wish displayed to the client.</param>
+            <param name="e">Inner exception (I.E. you caught this).</param>
+        </member>
+        <member name="M:Azavea.Web.Exceptions.AzaveaWebArgumentException.#ctor(System.String)">
+            <summary>
+            Construct the exception without an inner exception.
+            </summary>
+            <param name="message">Message you wish displayed to the client.</param>
+        </member>
+        <member name="M:Azavea.Web.Exceptions.AzaveaWebArgumentException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct the exception with an inner exception.
+            </summary>
+            <param name="message">Message you wish displayed to the client.</param>
+            <param name="e">Inner exception (I.E. you caught this).</param>
+        </member>
+        <member name="T:Azavea.Web.Exceptions.AzaveaWebMessageException">
+            <summary>
+            Throw this exception if you caught an exception but have a particular error message
+            you want to give the client.  
+            
+            Will be returned as "InternalServerError (500)".
+            </summary>
+        </member>
+        <member name="M:Azavea.Web.Exceptions.AzaveaWebMessageException.#ctor(System.String)">
+            <summary>
+            Construct the exception without an inner exception.
+            </summary>
+            <param name="message">Message you wish displayed to the client.</param>
+        </member>
+        <member name="M:Azavea.Web.Exceptions.AzaveaWebMessageException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct the exception with an inner exception.
+            </summary>
+            <param name="message">Message you wish displayed to the client.</param>
+            <param name="e">Inner exception (I.E. you caught this).</param>
+        </member>
+        <member name="T:Azavea.Web.Exceptions.AzaveaWebNotImplementedException">
+            <summary>
+            Throw this exception if the client called something that is not implemented.
+            
+            Will be returned as "MethodNotAllowed (405)".
+            </summary>
+        </member>
+        <member name="M:Azavea.Web.Exceptions.AzaveaWebNotImplementedException.#ctor(System.String)">
+            <summary>
+            Construct the exception without an inner exception.
+            </summary>
+            <param name="message">Message you wish displayed to the client.</param>
+        </member>
+        <member name="M:Azavea.Web.Exceptions.AzaveaWebNotImplementedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct the exception with an inner exception.
+            </summary>
+            <param name="message">Message you wish displayed to the client.</param>
+            <param name="e">Inner exception (I.E. you caught this).</param>
+        </member>
+        <member name="T:Azavea.Web.Exceptions.AzaveaWebNotAuthorizedException">
+            <summary>
+            Throw this exception if the user is attempting an action they do not
+            have sufficient privileges for.
+            
+            Will be returned as "Forbidden (403)".
+            </summary>
+        </member>
+        <member name="M:Azavea.Web.Exceptions.AzaveaWebNotAuthorizedException.#ctor(System.String)">
+            <summary>
+            Construct the exception without an inner exception.
+            </summary>
+            <param name="message">Message you wish displayed to the client.</param>
+        </member>
+        <member name="M:Azavea.Web.Exceptions.AzaveaWebNotAuthorizedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct the exception with an inner exception.
+            </summary>
+            <param name="message">Message you wish displayed to the client.</param>
+            <param name="e">Inner exception (I.E. you caught this).</param>
+        </member>
+        <member name="T:Azavea.Web.Exceptions.AzaveaWebBadRequestException">
+            <summary>
+            Throw this exception if something about the request is invalid but
+            there is no more specific exception or error code that you can throw.
+            
+            Will be returned as "Bad Request (400)".
+            </summary>
+        </member>
+        <member name="M:Azavea.Web.Exceptions.AzaveaWebBadRequestException.#ctor(System.String)">
+            <summary>
+            Construct the exception without an inner exception.
+            </summary>
+            <param name="message">Message you wish displayed to the client.</param>
+        </member>
+        <member name="M:Azavea.Web.Exceptions.AzaveaWebBadRequestException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct the exception with an inner exception.
+            </summary>
+            <param name="message">Message you wish displayed to the client.</param>
+            <param name="e">Inner exception (I.E. you caught this).</param>
+        </member>
+        <member name="T:Azavea.Web.Handler.CachedHandler">
+            <summary>
+            This handler base class exists for backwards compatibility.  The old handler
+            base class was named CachedHandler and defaulted to always using the cache.
+            Now you can just use BaseHandler, which has all the helper methods including
+            the cache, but defaults to NOT using the cache... a much more intuitive default.
+            </summary>
+        </member>
+        <member name="T:Azavea.Web.Handler.BaseHandler">
+            <summary>
+            This handler base class takes care of catching unhandled exceptions, returning
+            correct HTTP error codes, and caching data across multiple calls to the
+            handler with the same parameters.
+            
+            It also contains basic helpers to do things like parse the query string.
+            </summary>
+        </member>
+        <member name="F:Azavea.Web.Handler.BaseHandler.QueryStringKeyRemovalRegex">
+            <summary>
+            Some frameworks append random or incremental values to the querystring
+            in an attempt to force the browser (cough IE cough) not to use the cache
+            on every single call.  The problem is that also makes the caching in
+            this handler not work, so we allow you to set a regex that defines
+            text to be removed from the query string before using it as a cache key.
+            For example, to remove "blah=238" (assuming 238 could be any number), use:
+                blah=[0-9]*
+            </summary>
+        </member>
+        <member name="F:Azavea.Web.Handler.BaseHandler._log">
+            <summary>
+            A logger that can be used by any child class.
+            </summary>
+        </member>
+        <member name="F:Azavea.Web.Handler.BaseHandler._caches">
+            <summary>
+            We keep one HandlerTimedCache per handler URL.
+            </summary>
+        </member>
+        <member name="F:Azavea.Web.Handler.BaseHandler.CompressResponse">
+            <summary>
+            True if we are to use GZip or Deflate to compress the results of the
+            handler before sending them to the client.
+            </summary>
+        </member>
+        <member name="M:Azavea.Web.Handler.BaseHandler.#ctor">
+            <summary>
+            Construct a base handler.  The query string will be used unmodified as part of the
+            cache key if you enable caching.
+            </summary>
+        </member>
+        <member name="M:Azavea.Web.Handler.BaseHandler.#ctor(System.Boolean)">
+            <summary>
+            Construct a base handler.  The query string will be used unmodified as part of the
+            cache key if you enable caching.
+            </summary>
+            <param name="compressResponse">Enable gzipping or deflating if the client supports it.</param>
+        </member>
+        <member name="M:Azavea.Web.Handler.BaseHandler.#ctor(System.String)">
+            <summary>
+            Construct a base handler.  The regex provided (if any) will be used
+            to modify the query string before using it as a cache key, allowing you
+            to selectively ignore parameters for caching purposes if you choose.
+            </summary>
+            <param name="queryStringKeyRemovalRegex">
+            Some frameworks append random or incremental values to the querystring
+            in an attempt to force the browser (cough IE cough) not to use the cache
+            on every single call.  The problem is that also makes the caching in
+            this handler not work, so we allow you to set a regex that defines
+            text to be removed from the query string before using it as a cache key.
+            For example, to remove "blah=238" (assuming 238 could be any number), use:
+                blah=[0-9]*
+            This may be null if you do not wish to modify the querystring.</param>
+        </member>
+        <member name="M:Azavea.Web.Handler.BaseHandler.#ctor(System.String,System.Boolean)">
+            <summary>
+            Construct a base handler.  The regex provided (if any) will be used
+            to modify the query string before using it as a cache key, allowing you
+            to selectively ignore parameters for caching purposes if you choose.
+            </summary>
+            <param name="queryStringKeyRemovalRegex">
+            Some frameworks append random or incremental values to the querystring
+            in an attempt to force the browser (cough IE cough) not to use the cache
+            on every single call.  The problem is that also makes the caching in
+            this handler not work, so we allow you to set a regex that defines
+            text to be removed from the query string before using it as a cache key.
+            For example, to remove "blah=238" (assuming 238 could be any number), use:
+                blah=[0-9]*
+            This may be null if you do not wish to modify the querystring.</param>
+            <param name="compressResponse">Enable gzipping or deflating if the client supports it.</param>
+        </member>
+        <member name="M:Azavea.Web.Handler.BaseHandler.InternalInit(System.Web.HttpContext,Azavea.Web.Handler.HandlerTimedCache)">
+            <summary>
+            This method will be called on every handler invocation, before any of the
+            others (including UseResponseCache or AdditionalCacheKey).  Override it
+            if there is anything that needs to always happen even for cached responses.
+            
+            Default implementation does nothing.
+            </summary>
+            <param name="context">An <see cref="T:System.Web.HttpContext" /> object that provides references to the intrinsic server objects (for example, Request, Response, Session, and Server) used to service HTTP requests. </param>
+            <param name="cache">Cache that can be used to store any relevant data.</param>
+        </member>
+        <member name="M:Azavea.Web.Handler.BaseHandler.InternalGET(System.Web.HttpContext,Azavea.Web.Handler.HandlerTimedCache)">
+            <summary>
+            Override this method to do the GET processing, however you don't need
+            good error handling as the base class will wrap this call with a try/catch.
+            
+            Throw AzaveaWebArgumentExceptions if there is bad input (bad or missing query string params
+            for example), or any other relevant AzaveaWeb...Exceptions.  Any other exceptions uncaught
+            exceptions will be turned into "internal server error" http result codes.
+            
+            You are responsible for calling context.Response.Write(...) with any response you
+            generate.  context.Response.ContentType will be set to text/plain, if you wish
+            a different type you need to set it.
+            </summary>
+            <param name="context">An <see cref="T:System.Web.HttpContext" /> object that provides references to the intrinsic server objects (for example, Request, Response, Session, and Server) used to service HTTP requests. </param>
+            <param name="cache">Cache that can be used to store any relevant data.</param>
+        </member>
+        <member name="M:Azavea.Web.Handler.BaseHandler.InternalPOST(System.Web.HttpContext,Azavea.Web.Handler.HandlerTimedCache)">
+            <summary>
+            Override this method to do the POST processing, however you don't need
+            good error handling as the base class will wrap this call with a try/catch.
+            
+            Throw AzaveaWebArgumentExceptions if there is bad input (bad or missing query string params
+            for example), or any other relevant AzaveaWeb...Exceptions.  Any other exceptions uncaught
+            exceptions will be turned into "internal server error" http result codes.
+            
+            You are responsible for calling context.Response.Write(...) with any response you
+            generate.  context.Response.ContentType will be set to text/plain, if you wish
+            a different type you need to set it.
+            </summary>
+            <param name="context">An <see cref="T:System.Web.HttpContext" /> object that provides references to the intrinsic server objects (for example, Request, Response, Session, and Server) used to service HTTP requests. </param>
+            <param name="cache">Cache that can be used to store any relevant data.</param>
+        </member>
+        <member name="M:Azavea.Web.Handler.BaseHandler.InternalPUT(System.Web.HttpContext,Azavea.Web.Handler.HandlerTimedCache)">
+            <summary>
+            Override this method to do the PUT processing, however you don't need
+            good error handling as the base class will wrap this call with a try/catch.
+            
+            Throw AzaveaWebArgumentExceptions if there is bad input (bad or missing query string params
+            for example), or any other relevant AzaveaWeb...Exceptions.  Any other exceptions uncaught
+            exceptions will be turned into "internal server error" http result codes.
+            
+            You are responsible for calling context.Response.Write(...) with any response you
+            generate.  context.Response.ContentType will be set to text/plain, if you wish
+            a different type you need to set it.
+            </summary>
+            <param name="context">An <see cref="T:System.Web.HttpContext" /> object that provides references to the intrinsic server objects (for example, Request, Response, Session, and Server) used to service HTTP requests. </param>
+            <param name="cache">Cache that can be used to store any relevant data.</param>
+        </member>
+        <member name="M:Azavea.Web.Handler.BaseHandler.InternalDELETE(System.Web.HttpContext,Azavea.Web.Handler.HandlerTimedCache)">
+            <summary>
+            Override this method to do the DELETE processing, however you don't need
+            good error handling as the base class will wrap this call with a try/catch.
+            
+            Throw AzaveaWebArgumentExceptions if there is bad input (bad or missing query string params
+            for example), or any other relevant AzaveaWeb...Exceptions.  Any other exceptions uncaught
+            exceptions will be turned into "internal server error" http result codes.
+            
+            You are responsible for calling context.Response.Write(...) with any response you
+            generate.  context.Response.ContentType will be set to text/plain, if you wish
+            a different type you need to set it.
+            </summary>
+            <param name="context">An <see cref="T:System.Web.HttpContext" /> object that provides references to the intrinsic server objects (for example, Request, Response, Session, and Server) used to service HTTP requests. </param>
+            <param name="cache">Cache that can be used to store any relevant data.</param>
+        </member>
+        <member name="M:Azavea.Web.Handler.BaseHandler.UseResponseCache(System.Web.HttpContext)">
+            <summary>
+            Override this method to add logic about whether or not to cache the
+            handler results.  Default implementation always returns false.  For
+            backwards compatibility, the CachedHandler class exists which overrides
+            this and always returns true.
+            
+            The context is passed to allow child classes to override this with
+            a "smart" implementation, that caches some calls but not others
+            (perhaps depending on the parameters for example).
+            </summary>
+            <param name="context">The context for the current call.</param>
+            <returns>True means use the cache, false means do not use the cache.</returns>
+        </member>
+        <member name="M:Azavea.Web.Handler.BaseHandler.AdditionalCacheKey(System.Web.HttpContext,Azavea.Web.Handler.HandlerTimedCache)">
+            <summary>
+            Override this method to add additional cache key info for the response from
+            your handler, like a user ID that is stored in the session for example.
+            </summary>
+            <param name="context">The context for the current call.</param>
+            <param name="cache">The cache for your handler.</param>
+            <returns>Any additional cache key info, or null.</returns>
+        </member>
+        <member name="M:Azavea.Web.Handler.BaseHandler.GetCacheDuration">
+            <summary>
+            Override this method to change how long the cache keeps cached data and responses.
+            Default is 1 hour.  This method is used only when creating the cache in the first
+            place, so changing this value later will have no effect.
+            </summary>
+            <returns>The length of time the cache should keep responses or data for.</returns>
+        </member>
+        <member name="M:Azavea.Web.Handler.BaseHandler.ProcessRequest(System.Web.HttpContext)">
+            <summary>
+            Enables processing of HTTP Web requests by a custom HttpHandler that implements the <see cref="T:System.Web.IHttpHandler" /> interface.
+            
+            NOTE: Do not override this method.  Instead, override InteralGET or InternalPOST.
+            </summary>
+            <param name="context">An <see cref="T:System.Web.HttpContext" /> object that provides references to the intrinsic server objects (for example, Request, Response, Session, and Server) used to service HTTP requests. </param>
+        </member>
+        <member name="M:Azavea.Web.Handler.BaseHandler.GetHttpMethod(System.Web.HttpContext)">
+            <summary>
+            Returns the real HttpMethod unless it was overridden with the "_method" parameter
+            (since some clients cannot actually make PUT or DELETE calls, we allow them to
+            specify what they're trying to make in a POST instead).
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Azavea.Web.Handler.BaseHandler.ClearAllCaches">
+            <summary>
+            Blows away all cached data and responses for all handlers.
+            </summary>
+        </member>
+        <member name="M:Azavea.Web.Handler.BaseHandler.ClearThisCache(System.Type)">
+            <summary>
+            Blows away just the cached data for the current handler.
+            </summary>
+            <param name="handlerType">The Type of handler you want to clear the cache for.</param>
+        </member>
+        <member name="M:Azavea.Web.Handler.BaseHandler.GetSupportedCompression(System.Web.HttpContext)">
+            This code was inspired by a blog post at:
+            http://west-wind.com/Weblog/posts/102969.aspx
+            <summary>
+            Determines if response compression is supported.
+            </summary>
+            <returns>Compression type we will be supporting.</returns>
+        </member>
+        <member name="M:Azavea.Web.Handler.BaseHandler.WriteCompressionResponseHeader(System.Web.HttpResponse,Azavea.Web.Handler.BaseHandler.ResponseCompressionType)">
+            <summary>
+            Writes the header info telling the client that the response is compressed.
+            </summary>
+            <param name="response">Response we're writing to.</param>
+            <param name="type">What type of compression is supported.</param>
+        </member>
+        <member name="M:Azavea.Web.Handler.BaseHandler.AddCompressionFilter(System.Web.HttpResponse,Azavea.Web.Handler.BaseHandler.ResponseCompressionType)">
+            <summary>
+            Add a stream filter to compress the response stream based on the type of
+            compression supported by the client.
+            </summary>
+            <param name="response">Response we're writing to.</param>
+            <param name="type">What type of compression is supported.</param>
+        </member>
+        <member name="P:Azavea.Web.Handler.BaseHandler.IsReusable">
+            <summary>
+            Gets a value indicating whether another request can use the <see cref="T:System.Web.IHttpHandler" /> instance.
+             
+             NOTE: WHAT THIS MEANS IS:
+             If you return true, everything in your code must be thread-safe, since IIS will
+             allow many threads to use this same object to process requests at the same time.
+             This base class has been written such that if you override this to return true,
+             it "should" be ok (as long as your own code is thread-safe).  However it has not
+             yet been tested.
+            </summary>
+            
+            <returns>
+            true if the <see cref="T:System.Web.IHttpHandler" /> instance is reusable; otherwise, false.
+            </returns>
+            
+        </member>
+        <member name="T:Azavea.Web.Handler.BaseHandler.ResponseCompressionType">
+            <summary>
+            What type of compression does the client support and do we want to use?
+            </summary>
+        </member>
+        <member name="F:Azavea.Web.Handler.BaseHandler.ResponseCompressionType.None">
+            <summary>
+            Client does not support response compression.
+            </summary>
+        </member>
+        <member name="F:Azavea.Web.Handler.BaseHandler.ResponseCompressionType.GZip">
+            <summary>
+            Most common compression type.
+            </summary>
+        </member>
+        <member name="F:Azavea.Web.Handler.BaseHandler.ResponseCompressionType.Deflate">
+            <summary>
+            Older, less effective, less popular compression type.
+            </summary>
+        </member>
+        <member name="M:Azavea.Web.Handler.CachedHandler.UseResponseCache(System.Web.HttpContext)">
+            <summary>
+            Override this method to add logic about whether or not to cache the
+            handler results.  Default implementation always returns false.  For
+            backwards compatibility, the CachedHandler class exists which overrides
+            this and always returns true.
+            
+            The context is passed to allow child classes to override this with
+            a "smart" implementation, that caches some calls but not others
+            (perhaps depending on the parameters for example).
+            </summary>
+            <param name="context">The context for the current call.</param>
+            <returns>True means use the cache, false means do not use the cache.</returns>
+        </member>
+        <member name="M:Azavea.Web.Handler.CachedHandler.#ctor">
+            <summary>
+            Construct a cached handler.  The query string will be used unmodified as part of the
+            cache key if you enable caching.
+            </summary>
+        </member>
+        <member name="M:Azavea.Web.Handler.CachedHandler.#ctor(System.Boolean)">
+            <summary>
+            Construct a cached handler.  The query string will be used unmodified as part of the
+            cache key if you enable caching.
+            </summary>
+            <param name="compressResponse">Enable gzipping or deflating if the client supports it.</param>
+        </member>
+        <member name="M:Azavea.Web.Handler.CachedHandler.#ctor(System.String)">
+            <summary>
+            Construct a cached handler.  The regex provided (if any) will be used
+            to modify the query string before using it as a cache key, allowing you
+            to selectively ignore parameters for caching purposes if you choose.
+            </summary>
+            <param name="queryStringKeyRemovalRegex">
+            Some frameworks append random or incremental values to the querystring
+            in an attempt to force the browser (cough IE cough) not to use the cache
+            on every single call.  The problem is that also makes the caching in
+            this handler not work, so we allow you to set a regex that defines
+            text to be removed from the query string before using it as a cache key.
+            For example, to remove "blah=238" (assuming 238 could be any number), use:
+                blah=[0-9]*
+            This may be null if you do not wish to modify the querystring.</param>
+        </member>
+        <member name="M:Azavea.Web.Handler.CachedHandler.#ctor(System.String,System.Boolean)">
+            <summary>
+            Construct a cached handler.  The regex provided (if any) will be used
+            to modify the query string before using it as a cache key, allowing you
+            to selectively ignore parameters for caching purposes if you choose.
+            </summary>
+            <param name="queryStringKeyRemovalRegex">
+            Some frameworks append random or incremental values to the querystring
+            in an attempt to force the browser (cough IE cough) not to use the cache
+            on every single call.  The problem is that also makes the caching in
+            this handler not work, so we allow you to set a regex that defines
+            text to be removed from the query string before using it as a cache key.
+            For example, to remove "blah=238" (assuming 238 could be any number), use:
+                blah=[0-9]*
+            This may be null if you do not wish to modify the querystring.</param>
+            <param name="compressResponse">Enable gzipping or deflating if the client supports it.</param>
+        </member>
+        <member name="T:Azavea.Web.Handler.CachedResponse">
+            <summary>
+            Caches all relevant data from a response and writes it back whenever we want.
+            </summary>
+        </member>
+        <member name="M:Azavea.Web.Handler.CachedResponse.#ctor(System.Web.HttpResponse,Azavea.Web.Handler.CachingStream)">
+            <summary>
+            Caches all relevant data from the given response.
+            </summary>
+            <param name="response">The response we want to save.</param>
+            <param name="cacheStream">The stream we cached (or will cache,
+                                      prior to calling ToResponse) all the response
+                                      data to.</param>
+        </member>
+        <member name="M:Azavea.Web.Handler.CachedResponse.CacheIsReady">
+            <summary>
+            Returns whether or not the cached data is ready to be used.  Will wait
+            a short time to see if it becomes ready.
+            </summary>
+            <returns>true if you can use the cache, false otherwise.</returns>
+        </member>
+        <member name="M:Azavea.Web.Handler.CachedResponse.HeadersToResponse(System.Web.HttpResponse)">
+            <summary>
+            Clears the response and writes the cached header and metadata values to it.
+            </summary>
+            <param name="response">The response we want to populate from this cached response.</param>
+        </member>
+        <member name="M:Azavea.Web.Handler.CachedResponse.DataToResponse(System.Web.HttpResponse)">
+            <summary>
+            Writes the cached response stream to the response.  Returns whether or not
+            data was successfully written.  If not, you'll need to process the request
+            like normal.
+            </summary>
+            <param name="response">The response we want to populate from this cached response.</param>
+        </member>
+        <member name="T:Azavea.Web.Handler.CachingStream">
+            <summary>
+            This pseudo-stream class is used as a "filter" on the response.  It delegates
+            all calls straight to the real stream, except for writes, which it also copies
+            to the cache stream.
+            </summary>
+        </member>
+        <member name="M:Azavea.Web.Handler.CachingStream.#ctor(System.IO.Stream,System.IO.MemoryStream)">
+            <summary>
+            Create the CachingStream.
+            </summary>
+            <param name="realStream">Real output stream.</param>
+            <param name="cacheStream">Stream we're using to cache a copy of the data.</param>
+        </member>
+        <member name="M:Azavea.Web.Handler.CachingStream.Flush">
+            <summary>
+            When overridden in a derived class, clears all buffers for this stream and causes any buffered data to be written to the underlying device.
+            </summary>
+            <exception cref="T:System.IO.IOException">An I/O error occurs. </exception><filterpriority>2</filterpriority>
+        </member>
+        <member name="M:Azavea.Web.Handler.CachingStream.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the <see cref="T:System.IO.Stream"/> and optionally releases the managed resources.
+            </summary>
+            <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Azavea.Web.Handler.CachingStream.Seek(System.Int64,System.IO.SeekOrigin)">
+            <summary>
+            When overridden in a derived class, sets the position within the current stream.
+            </summary>
+            <returns>
+            The new position within the current stream.
+            </returns>
+            <param name="offset">A byte offset relative to the <paramref name="origin" /> parameter. </param>
+            <param name="origin">A value of type <see cref="T:System.IO.SeekOrigin" /> indicating the reference point used to obtain the new position. </param>
+            <exception cref="T:System.IO.IOException">An I/O error occurs. </exception>
+            <exception cref="T:System.NotSupportedException">The stream does not support seeking, such as if the stream is constructed from a pipe or console output. </exception>
+            <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed. </exception><filterpriority>1</filterpriority>
+        </member>
+        <member name="M:Azavea.Web.Handler.CachingStream.SetLength(System.Int64)">
+            <summary>
+            When overridden in a derived class, sets the length of the current stream.
+            </summary>
+            <param name="value">The desired length of the current stream in bytes. </param>
+            <exception cref="T:System.IO.IOException">An I/O error occurs. </exception>
+            <exception cref="T:System.NotSupportedException">The stream does not support both writing and seeking, such as if the stream is constructed from a pipe or console output. </exception>
+            <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed. </exception><filterpriority>2</filterpriority>
+        </member>
+        <member name="M:Azavea.Web.Handler.CachingStream.Read(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            When overridden in a derived class, reads a sequence of bytes from the current stream and advances the position within the stream by the number of bytes read.
+            </summary>
+            <returns>
+            The total number of bytes read into the buffer. This can be less than the number of bytes requested if that many bytes are not currently available, or zero (0) if the end of the stream has been reached.
+            </returns>
+            <param name="buffer">An array of bytes. When this method returns, the buffer contains the specified byte array with the values between <paramref name="offset" /> and (<paramref name="offset" /> + <paramref name="count" /> - 1) replaced by the bytes read from the current source. </param>
+            <param name="offset">The zero-based byte offset in <paramref name="buffer" /> at which to begin storing the data read from the current stream. </param>
+            <param name="count">The maximum number of bytes to be read from the current stream. </param>
+            <exception cref="T:System.ArgumentException">The sum of <paramref name="offset" /> and <paramref name="count" /> is larger than the buffer length. </exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="buffer" /> is null. </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="offset" /> or <paramref name="count" /> is negative. </exception>
+            <exception cref="T:System.IO.IOException">An I/O error occurs. </exception>
+            <exception cref="T:System.NotSupportedException">The stream does not support reading. </exception>
+            <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed. </exception><filterpriority>1</filterpriority>
+        </member>
+        <member name="M:Azavea.Web.Handler.CachingStream.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            When overridden in a derived class, writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written.
+            </summary>
+            <param name="buffer">An array of bytes. This method copies <paramref name="count" /> bytes from <paramref name="buffer" /> to the current stream. </param>
+            <param name="offset">The zero-based byte offset in <paramref name="buffer" /> at which to begin copying bytes to the current stream. </param>
+            <param name="count">The number of bytes to be written to the current stream. </param>
+            <exception cref="T:System.ArgumentException">The sum of <paramref name="offset" /> and <paramref name="count" /> is greater than the buffer length. </exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="buffer" /> is null. </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="offset" /> or <paramref name="count" /> is negative. </exception>
+            <exception cref="T:System.IO.IOException">An I/O error occurs. </exception>
+            <exception cref="T:System.NotSupportedException">The stream does not support writing. </exception>
+            <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed. </exception><filterpriority>1</filterpriority>
+        </member>
+        <member name="M:Azavea.Web.Handler.CachingStream.Close">
+            <summary>
+            Closes the current stream and releases any resources (such as sockets and file handles) associated with the current stream.
+            </summary>
+            <filterpriority>1</filterpriority>
+        </member>
+        <member name="M:Azavea.Web.Handler.CachingStream.IsCacheReady(System.Int32)">
+            <summary>
+            Checks if the cache is ready, if not, waits up to msToWait for it to become ready.
+            </summary>
+            <param name="msToWait">If the cache stream isn't closed yet,
+                                   how long to wait for it to be closed.  In milliseconds.</param>
+            <returns>Whether or not the cached data is complete and can be used.</returns>
+        </member>
+        <member name="M:Azavea.Web.Handler.CachingStream.CopyFromCache(System.IO.Stream)">
+            <summary>
+            If the cache is ready, copies the data from it into the given stream.
+            Will wait up to msToWait ms for the cache to be ready.
+            </summary>
+            <param name="writeHere">Stream to write the cached data to.</param>
+        </member>
+        <member name="P:Azavea.Web.Handler.CachingStream.CanRead">
+            <summary>
+            When overridden in a derived class, gets a value indicating whether the current stream supports reading.
+            </summary>
+            <returns>
+            true if the stream supports reading; otherwise, false.
+            </returns>
+            <filterpriority>1</filterpriority>
+        </member>
+        <member name="P:Azavea.Web.Handler.CachingStream.CanSeek">
+            <summary>
+            When overridden in a derived class, gets a value indicating whether the current stream supports seeking.
+            </summary>
+            <returns>
+            true if the stream supports seeking; otherwise, false.
+            </returns>
+            <filterpriority>1</filterpriority>
+        </member>
+        <member name="P:Azavea.Web.Handler.CachingStream.CanWrite">
+            <summary>
+            When overridden in a derived class, gets a value indicating whether the current stream supports writing.
+            </summary>
+            <returns>
+            true if the stream supports writing; otherwise, false.
+            </returns>
+            <filterpriority>1</filterpriority>
+        </member>
+        <member name="P:Azavea.Web.Handler.CachingStream.Length">
+            <summary>
+            When overridden in a derived class, gets the length in bytes of the stream.
+            </summary>
+            <returns>
+            A long value representing the length of the stream in bytes.
+            </returns>
+            <exception cref="T:System.NotSupportedException">A class derived from Stream does not support seeking. </exception>
+            <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed. </exception><filterpriority>1</filterpriority>
+        </member>
+        <member name="P:Azavea.Web.Handler.CachingStream.Position">
+            <summary>
+            When overridden in a derived class, gets or sets the position within the current stream.
+            </summary>
+            <returns>
+            The current position within the stream.
+            </returns>
+            <exception cref="T:System.IO.IOException">An I/O error occurs. </exception>
+            <exception cref="T:System.NotSupportedException">The stream does not support seeking. </exception>
+            <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed. </exception><filterpriority>1</filterpriority>
+        </member>
+        <member name="T:Azavea.Web.Handler.HandlerTimedCache">
+            <summary>
+            This cache holds cached info for the handler, including cached responses.
+            Everything cached has a timestamp, if the timestamp is older than the 
+            cache expiration then it will be discarded (at some point).  Requests 
+            for expired data always act as though the data is not present.
+            
+            This class is thread-safe.
+            </summary>
+        </member>
+        <member name="M:Azavea.Web.Handler.HandlerTimedCache.#ctor(System.TimeSpan)">
+            <summary>
+            Construct the cache.
+            </summary>
+            <param name="cacheDuration">How long should the cache keep things before discarding them.</param>
+        </member>
+        <member name="M:Azavea.Web.Handler.HandlerTimedCache.ContainsResponse(System.String)">
+            <summary>
+            Returns true only if we have a cached response for this key and
+            that response has not expired (and is not about to immediately).
+            
+            NOTE: A true response only guarauntees GetResponse(key) will work for 1 second after this call.
+            It is possible to call this, get true, wait 2 seconds,
+            call GetResponse, and get a KeyNotFoundException.  Thems the breaks
+            when using a cache with data that expires.
+            </summary>
+            <param name="key">Key that identifies the response you want.</param>
+            <returns>True if GetResponse(key) will return a valid response.</returns>
+        </member>
+        <member name="M:Azavea.Web.Handler.HandlerTimedCache.GetResponse(System.String)">
+            <summary>
+            Returns the response for the given cache key.  Throws KeyNotFoundException
+            if we don't have that key or if the value is expired.
+            </summary>
+            <param name="key">Key that identifies the response you want.</param>
+            <returns>The MemoryStream that was cached.</returns>
+        </member>
+        <member name="M:Azavea.Web.Handler.HandlerTimedCache.SetResponse(System.String,Azavea.Web.Handler.CachedResponse)">
+            <summary>
+            Saves the given response into the cache with the given key.
+            </summary>
+            <param name="key">Key to save the response under.</param>
+            <param name="response">Response to save.</param>
+        </member>
+        <member name="M:Azavea.Web.Handler.HandlerTimedCache.ContainsData(System.Object)">
+            <summary>
+            Returns true only if we have a cached data item for this key and
+            that data has not expired (and is not about to immediately).
+            
+            NOTE: A true response only guarauntees GetData(key) will work for 1 second after this call.
+            It is possible to call this, get true, wait 2 seconds,
+            call GetData, and get a KeyNotFoundException.  Thems the breaks
+            when using a cache with data that expires.
+            </summary>
+            <param name="key">Key that identifies the data you want.</param>
+            <returns>True if GetData(key) will return a valid data item.</returns>
+        </member>
+        <member name="M:Azavea.Web.Handler.HandlerTimedCache.GetData(System.Object)">
+            <summary>
+            Returns the data for the given cache key.  Throws KeyNotFoundException
+            if we don't have that key or if the value is expired.
+            </summary>
+            <param name="key">Key that identifies the data you want.</param>
+            <returns>The object that was cached.</returns>
+        </member>
+        <member name="M:Azavea.Web.Handler.HandlerTimedCache.SetData(System.String,System.Object)">
+            <summary>
+            Saves the given data into the cache with the given key.
+            </summary>
+            <param name="key">Key to save the data under.</param>
+            <param name="data">Data to save.</param>
+        </member>
+        <member name="T:Azavea.Web.Handler.LoggerHandler">
+            <summary>
+             A handler that logs messages to log4net.  Accepts the following parameters via
+             GET or POST:
+             
+                 message - Required, the message to log.
+                 url - Optional, the URL of the page you're calling from.
+                 triedTo - Optional, fill in the blank: "I was trying to _____________."
+                 logger - Optional, the logger to use, if you want to specify a particular log4net logger.
+                 level - Optional, the log level to log at.
+            </summary>
+        </member>
+        <member name="M:Azavea.Web.Handler.LoggerHandler.InternalGET(System.Web.HttpContext,Azavea.Web.Handler.HandlerTimedCache)">
+            <summary>
+            Override this method to do the GET processing, however you don't need
+            good error handling as the base class will wrap this call with a try/catch.
+            
+            Throw AzaveaWebArgumentExceptions if there is bad input (bad or missing query string params
+            for example), or any other relevant Handler...Exceptions.  Any other exceptions uncaught
+            exceptions will be turned into "internal server error" http result codes.
+            
+            You are responsible for calling context.Response.Write(...) with any response you
+            generate.  context.Response.ContentType will be set to text/plain, if you wish
+            a different type you need to set it.
+            </summary>
+            <param name="context">An <see cref="T:System.Web.HttpContext" /> object that provides references to the intrinsic server objects (for example, Request, Response, Session, and Server) used to service HTTP requests. </param>
+            <param name="cache">Cache that can be used to store any relevant data.</param>
+        </member>
+        <member name="M:Azavea.Web.Handler.LoggerHandler.InternalPOST(System.Web.HttpContext,Azavea.Web.Handler.HandlerTimedCache)">
+            <summary>
+            Override this method to do the POST processing, however you don't need
+            good error handling as the base class will wrap this call with a try/catch.
+            
+            Throw AzaveaWebArgumentExceptions if there is bad input (bad or missing query string params
+            for example), or any other relevant Handler...Exceptions.  Any other exceptions uncaught
+            exceptions will be turned into "internal server error" http result codes.
+            
+            You are responsible for calling context.Response.Write(...) with any response you
+            generate.  context.Response.ContentType will be set to text/plain, if you wish
+            a different type you need to set it.
+            </summary>
+            <param name="context">An <see cref="T:System.Web.HttpContext" /> object that provides references to the intrinsic server objects (for example, Request, Response, Session, and Server) used to service HTTP requests. </param>
+            <param name="cache">Cache that can be used to store any relevant data.</param>
+        </member>
+        <member name="M:Azavea.Web.Handler.LoggerHandler.GetOrPost(System.Web.HttpContext,Azavea.Web.Handler.HandlerTimedCache)">
+            <summary>
+            Reads the various optional parameters from the context and logs a message.
+            </summary>
+            <param name="context"></param>
+            <param name="cache"></param>
+        </member>
+        <member name="T:Azavea.Web.HostnameMapperHttpModule">
+             <summary>
+             This module parses the web.config file to get the differnt DNS mappings.
+             The config file should have the mapping in the following format.
+            
+                &lt;HostnameMapper mode="on" default="&lt;Default hostname&gt;"&gt;
+            	    &lt;Entries&gt;
+            		    &lt;add RegExPattern="&lt;Regular expression&gt;" Mapping="&lt;hostname to be redirected to&gt;" /&gt;
+            	    &lt;/Entries&gt;
+                &lt;/HostnameMapper&gt;
+             
+             To use add the module to your application add this system.web section of the web.config file.
+             
+                &lt;httpModules&gt;
+            	    &lt;add name="HostnameMapperHttpModule" type="Azavea.Web.HostnameMapperHttpModule, Azavea.Web"/&gt;
+                &lt;/httpModules&gt;
+             
+             You will also have to add this to the confiSections in the web.config file
+             
+                &lt;configSections&gt;
+            	    &lt;section name="HostnameMapper" type="Azavea.Web.HostnameMapperConfiguration"/&gt;
+                &lt;/configSections&gt;
+             </summary>
+        </member>
+        <member name="F:Azavea.Web.HostnameMapperHttpModule.mode">
+            <summary>
+            The HostnameMapper mode. Expected values: On/Off/Match
+            "On" means check base host against the "default" value
+            "Match" means only check regex matches and ignore base domain mismatches
+            "Off" ignores everything.
+            </summary>
+        </member>
+        <member name="M:Azavea.Web.HostnameMapperHttpModule.Init(System.Web.HttpApplication)">
+            <summary>
+            Initializes a module and prepares it to handle requests.
+            </summary>
+            <param name="app">
+            An <see cref="T:System.Web.HttpApplication" /> that provides access to the methods, properties, and events common to all application objects within an ASP.NET application 
+            </param>
+        </member>
+        <member name="M:Azavea.Web.HostnameMapperHttpModule.Dispose">
+            <summary>
+            Disposes of the resources (other than memory) used by the module that implements <see cref="T:System.Web.IHttpModule" />.
+            </summary>
+        </member>
+        <member name="M:Azavea.Web.HostnameMapperHttpModule.OnBeginRequest(System.Object,System.EventArgs)">
+            <summary>
+            This method checks the hostname of the website and redirects the appropriate mapping.
+            </summary>
+            <param name="o"></param>
+            <param name="args"></param>
+        </member>
+        <member name="T:Azavea.Web.MasterBase">
+            <summary>
+            A base class for master pages that provides support for rendering css and javascript files 
+            from multiple sources, as well as rendering in minified or non-minified.
+            
+            For future reference though, say the name of your classes out loud BEFORE you check them in.
+            </summary>
+        </member>
+        <member name="F:Azavea.Web.MasterBase._log">
+            <summary>
+            A logger that can be used by any child class.
+            </summary>
+        </member>
+        <member name="M:Azavea.Web.MasterBase.RegisterCssFile(System.String,System.String[],System.String,System.Boolean,System.String)">
+            <summary>
+            Register a CSS file to be rendered to the page header.
+            </summary>
+            <param name="href">The full url or local path to the css file.</param>
+            <param name="media">The media type or types you wish this css to apply, 
+                                such as "screen,print" or ""/null for all</param>
+            <param name="conditional">A conditional filter for the css file, such as "lt IE 8".</param>
+            <param name="minifiable">Whether or not this file can also be rendered as a minified version.</param>
+            <param name="minifySuffix">An override to the default minify suffix (-min).  
+            i.e. If your file needs to be mycssfile.min.css instead of mycssfile-min.css
+            </param>
+        </member>
+        <member name="M:Azavea.Web.MasterBase.RegisterCssFile(System.String,System.String,System.Boolean,System.String)">
+            <summary>
+            Register a CSS file to be rendered to the page header.
+            </summary>
+            <param name="href">The full url or local path to the css file.</param>
+            <param name="conditional">A conditional filter for the css file, such as "lt IE 8".</param>
+            <param name="minifiable">Whether or not this file can also be rendered as a minified version.</param>
+            <param name="minifySuffix">An override to the default minify suffix (-min).  
+            i.e. If your file needs to be mycssfile.min.css instead of mycssfile-min.css
+            </param>
+        </member>
+        <member name="M:Azavea.Web.MasterBase.RegisterCssFile(System.String,System.String[],System.Boolean,System.String)">
+            <summary>
+            Register a CSS file to be rendered to the page header.
+            </summary>
+            <param name="href">The full url or local path to the css file.</param>
+            <param name="media"></param>
+            <param name="minifiable">Whether or not this file can also be rendered as a minified version.</param>
+            <param name="minifySuffix">An override to the default minify suffix (-min).  
+            i.e. If your file needs to be mycssfile.min.css instead of mycssfile-min.css
+            </param>
+        </member>
+        <member name="M:Azavea.Web.MasterBase.RegisterCssFile(System.String,System.Boolean,System.String)">
+            <summary>
+            Register a CSS file to be rendered to the page header.
+            </summary>
+            <param name="href">The full url or local path to the css file.</param>
+            <param name="minifiable">Whether or not this file can also be rendered as a minified version.</param>
+            <param name="minifySuffix">An override to the default minify suffix (-min).  
+            i.e. If your file needs to be mycssfile.min.css instead of mycssfile-min.css
+            </param>
+        </member>
+        <member name="M:Azavea.Web.MasterBase.RegisterCssFile(System.String,System.Boolean)">
+            <summary>
+            Register a CSS file to be rendered to the page header.
+            </summary>
+            <param name="href">The full url or local path to the css file.</param>
+            <param name="minifiable">Whether or not this file can also be rendered as a minified version.</param>
+        </member>
+        <member name="M:Azavea.Web.MasterBase.RegisterCssFile(System.String,System.String,System.Boolean)">
+            <summary>
+            Register a CSS file to be rendered to the page header.
+            </summary>
+            <param name="href">The full url or local path to the css file.</param>
+            <param name="conditional">A conditional filter for the css file, such as "lt IE 8".</param>
+            <param name="minifiable">Whether or not this file can also be rendered as a minified version.</param>
+        </member>
+        <member name="M:Azavea.Web.MasterBase.RegisterCssFile(System.String,System.String[],System.Boolean)">
+            <summary>
+            Register a CSS file to be rendered to the page header.
+            </summary>
+            <param name="href">The full url or local path to the css file.</param>
+            <param name="media">The media type or types you wish this css to apply, 
+                                such as "screen,print" or ""/null for all</param>
+            <param name="minifiable">Whether or not this file can also be rendered as a minified version.</param>
+        </member>
+        <member name="M:Azavea.Web.MasterBase.RegisterCssFile(System.String,System.String)">
+            <summary>
+            Register a CSS file to be rendered to the page header.  "Minifiable" will be set to false.
+            </summary>
+            <param name="href">The full url or local path to the css file.</param>
+            <param name="conditional">A conditional filter for the css file, such as "lt IE 8".</param>
+        </member>
+        <member name="M:Azavea.Web.MasterBase.RegisterCssFile(System.String,System.String[])">
+            <summary>
+            Register a CSS file to be rendered to the page header.  "Minifiable" will be set to false.
+            </summary>
+            <param name="href">The full url or local path to the css file.</param>
+            <param name="media">The media type or types you wish this css to apply, 
+                                such as "screen,print" or ""/null for all</param>
+        </member>
+        <member name="M:Azavea.Web.MasterBase.RegisterCssFile(System.String)">
+            <summary>
+            Register a CSS file to be rendered to the page header.  "Minifiable" will be set to false.
+            </summary>
+            <param name="href">The full url or local path to the css file.</param>
+        </member>
+        <member name="M:Azavea.Web.MasterBase.RemoveRegisteredCssFile(System.String)">
+            <summary>
+            Remove a previous registered file, keyed by its href value.
+            No error will be thrown if the file does not exist in the registered files list.
+            </summary>
+            <param name="href">The full url or local path to the css file to remove.</param>
+        </member>
+        <member name="M:Azavea.Web.MasterBase.RegisterJavascriptFile(System.String,System.Boolean,System.String)">
+            <summary>
+            Register a JavaScript file to be rendered to the page header.
+            </summary>
+            <param name="src">The full url or local path to the javascript file.</param>
+            <param name="minifiable">Whether or not this file can also be rendered as a minified version.</param>
+            <param name="minifySuffix">An override to the default minify suffix (-min).  
+            i.e. If your file needs to be mycssfile.min.css instead of mycssfile-min.css
+            </param>
+        </member>
+        <member name="M:Azavea.Web.MasterBase.RegisterJavascriptFile(System.String,System.Boolean)">
+            <summary>
+            Register a JavaScript file to be rendered to the page header.
+            </summary>
+            <param name="src">The full url or local path to the javascript file.</param>
+            <param name="minifiable">Whether or not this file can also be rendered as a minified version.</param>
+        </member>
+        <member name="M:Azavea.Web.MasterBase.RegisterJavascriptFile(System.String)">
+            <summary>
+            Register a JavaScript file to be rendered to the page header.  "Minifiable" will be set to false.
+            </summary>
+            <param name="src">The full url or local path to the javascript file.</param>
+        </member>
+        <member name="M:Azavea.Web.MasterBase.RemoveRegisteredJavascriptFile(System.String)">
+            <summary>
+            Remove a previous registered file, keyed by its src value.
+            No error will be thrown if the file does not exist in the registered files list.
+            </summary>
+            <param name="src">The full url or local path to the javascript file to remove.</param>
+        </member>
+        <member name="M:Azavea.Web.MasterBase.OnPreRender(System.EventArgs)">
+            <summary>
+            
+                                Raises the <see cref="E:System.Web.UI.Control.PreRender" /> event.
+                            
+            </summary>
+            
+            <param name="e">
+                                An <see cref="T:System.EventArgs" /> object that contains the event data. 
+                            </param>
+        </member>
+        <member name="P:Azavea.Web.MasterBase.UseConfigSetting">
+            <summary>
+            Set to true if you want to decision of whether or not to use minified files to come from the config value.
+            The config value will be read from Azavea.Utilties.Web -> WebMediaFile -> USE_MINIFIED_FILES
+            </summary>
+        </member>
+        <member name="P:Azavea.Web.MasterBase.UseDebugRelease">
+            <summary>
+            If set to true, the decision of whether or not to use minified files will be made based on whether the 
+            project is built in DEBUG or RELEASE mode.  This is the default be behavior and will be overriden if 
+            UseConfigSetting is set to true.
+            </summary>
+        </member>
+        <member name="P:Azavea.Web.MasterBase.UseMinifiedFiles">
+            <summary>
+            An override to allow you to set whether or not files should be rendered in their minified form at runtime.
+            DEBUG vs RELEASE and Config values will be ignored.
+            </summary>
+        </member>
+        <member name="P:Azavea.Web.MasterBase.CssControlID">
+            <summary>
+            The ID of a Literal on the page where registered CSS files should be rendered.
+            Defaults to CSSFilesLiteral.
+            </summary>
+        </member>
+        <member name="P:Azavea.Web.MasterBase.JSControlID">
+            <summary>
+            The ID of a Literal on the page where registered JavaScript files should be rendered.
+            Defaults to JSFilesLiteral.
+            </summary>
+        </member>
+        <member name="P:Azavea.Web.MasterBase.FilePathPrefix">
+            <summary>
+            A prefix to use in front of all resource files to make relative paths (e.g. "../")
+            </summary>
+        </member>
+        <member name="T:Azavea.Web.MasterBase.CssFile">
+            <summary>
+            Internal definition for a css file
+            </summary>
+        </member>
+        <member name="T:Azavea.Web.MasterBase.JsFile">
+            <summary>
+            Internal definition for a javascript file
+            </summary>
+        </member>
+        <member name="T:Azavea.Web.NetUtil">
+            <summary>
+            A utility class that's intended to be a little lower-level than the WebUtil class,
+            more focused on network things.
+            </summary>
+        </member>
+        <member name="M:Azavea.Web.NetUtil.Traceroute(System.String)">
+            <summary>
+            Performs a trace route to a host.
+            </summary>
+            <param name="ipAddressOrHostName">Target to trace the route to.</param>
+            <returns>A string containing the route.</returns>
+        </member>
+        <member name="M:Azavea.Web.NetUtil.Traceroute(System.String,System.Int32)">
+            <summary>
+            Performs a trace route to a host.
+            </summary>
+            <param name="ipAddressOrHostName">Target to trace the route to.</param>
+            <param name="maxHops">Maximum number of hops to follow the route to.</param>
+            <returns>A string containing the route.</returns>
+        </member>
+        <member name="M:Azavea.Web.NetUtil.Traceroute(System.String,System.Int32,System.Int32)">
+            <summary>
+            Uses the Ping class to perform a traceroute.
+            The code was taken originally from Jim Scott's blog:
+                http://coding.infoconex.com/post/2009/01/C-Traceroute-using-net-framework.aspx
+            </summary>
+            <param name="ipAddressOrHostName">Target to trace the route to.</param>
+            <param name="maxHops">Maximum number of hops to follow the route to.</param>
+            <param name="timeoutMs">Timeout (in milliseconds) before deciding a host will not reply.</param>
+            <returns>A string containing the route.</returns>
+        </member>
+        <member name="T:Azavea.Web.Page.BasePage">
+            <summary>
+            This page base class takes care of catching unhandled exceptions, returning
+            correct HTTP error codes.  It also allows differentiation of HTTP request type
+            for handling REST-style interaction.
+            
+            The "normal" method to override is InternalGETorPOST.
+            </summary>
+        </member>
+        <member name="F:Azavea.Web.Page.BasePage._log">
+            <summary>
+            A logger that can be used by any child class.
+            </summary>
+        </member>
+        <member name="M:Azavea.Web.Page.BasePage.InternalInit(System.Web.HttpContext)">
+            <summary>
+            This method will be called on every page call, before any of the
+            other method-specific methods.  Override it
+            if there is anything that needs to always happen regardless of the
+            http request method.
+            
+            Default implementation does nothing.
+            </summary>
+            <param name="context">An <see cref="T:System.Web.HttpContext" /> object that provides references to the intrinsic server objects (for example, Request, Response, Session, and Server) used to service HTTP requests. </param>
+        </member>
+        <member name="M:Azavea.Web.Page.BasePage.InternalGET(System.Web.HttpContext)">
+            <summary>
+            Override this method to do the GET processing, however you don't need
+            good error handling as the base class will wrap this call with a try/catch.
+            
+            Throw AzaveaWebArgumentExceptions if there is bad input (bad or missing query string params
+            for example), or any other relevant AzaveaWeb...Exceptions.  Any other exceptions uncaught
+            exceptions will be turned into "internal server error" http result codes.
+            
+            You should use the context and/or Response objects the same way you normally would.
+            
+            The default implementation does nothing, allowing the .NET page to just render
+            however it wants.
+            </summary>
+            <param name="context">An <see cref="T:System.Web.HttpContext" /> object that provides references to the intrinsic server objects (for example, Request, Response, Session, and Server) used to service HTTP requests. </param>
+        </member>
+        <member name="M:Azavea.Web.Page.BasePage.InternalPOST(System.Web.HttpContext)">
+            <summary>
+            Override this method to do the POST processing, however you don't need
+            good error handling as the base class will wrap this call with a try/catch.
+            
+            Throw AzaveaWebArgumentExceptions if there is bad input (bad or missing query string params
+            for example), or any other relevant AzaveaWeb...Exceptions.  Any other exceptions uncaught
+            exceptions will be turned into "internal server error" http result codes.
+            
+            You should use the context and/or Response objects the same way you normally would.
+            
+            Default implementation does nothing, allowing the .NET page to handle callbacks
+            however it wants.
+            </summary>
+            <param name="context">An <see cref="T:System.Web.HttpContext" /> object that provides references to the intrinsic server objects (for example, Request, Response, Session, and Server) used to service HTTP requests. </param>
+        </member>
+        <member name="M:Azavea.Web.Page.BasePage.InternalGETorPOST(System.Web.HttpContext)">
+            <summary>
+            Override this method to handle GET and POST processing the same way.
+            If you override this, InternalGET and InternalPOST will not be used.
+            
+            Throw AzaveaWebArgumentExceptions if there is bad input (bad or missing query string params
+            for example), or any other relevant AzaveaWeb...Exceptions.  Any other exceptions uncaught
+            exceptions will be turned into "internal server error" http result codes.
+            
+            You should use the context and/or Response objects the same way you normally would.
+            </summary>
+            <param name="context">An <see cref="T:System.Web.HttpContext" /> object that provides references to the intrinsic server objects (for example, Request, Response, Session, and Server) used to service HTTP requests. </param>
+        </member>
+        <member name="M:Azavea.Web.Page.BasePage.InternalPUT(System.Web.HttpContext)">
+            <summary>
+            Override this method to do the PUT processing, however you don't need
+            good error handling as the base class will wrap this call with a try/catch.
+            
+            Throw AzaveaWebArgumentExceptions if there is bad input (bad or missing query string params
+            for example), or any other relevant AzaveaWeb...Exceptions.  Any other exceptions uncaught
+            exceptions will be turned into "internal server error" http result codes.
+            
+            You should use the context and/or Response objects the same way you normally would.
+            
+            Default implementation throws an exception, since PUT is not handled by .NET by default.
+            </summary>
+            <param name="context">An <see cref="T:System.Web.HttpContext" /> object that provides references to the intrinsic server objects (for example, Request, Response, Session, and Server) used to service HTTP requests. </param>
+        </member>
+        <member name="M:Azavea.Web.Page.BasePage.InternalDELETE(System.Web.HttpContext)">
+            <summary>
+            Override this method to do the DELETE processing, however you don't need
+            good error handling as the base class will wrap this call with a try/catch.
+            
+            Throw AzaveaWebArgumentExceptions if there is bad input (bad or missing query string params
+            for example), or any other relevant AzaveaWeb...Exceptions.  Any other exceptions uncaught
+            exceptions will be turned into "internal server error" http result codes.
+            
+            You should use the context and/or Response objects the same way you normally would.
+            
+            Default implementation throws an exception, since DELETE is not handled by .NET by default.
+            </summary>
+            <param name="context">An <see cref="T:System.Web.HttpContext" /> object that provides references to the intrinsic server objects (for example, Request, Response, Session, and Server) used to service HTTP requests. </param>
+        </member>
+        <member name="M:Azavea.Web.Page.BasePage.InternalOnError(System.Web.HttpContext,System.Exception)">
+            <summary>
+            This is the error handling method called when the BasePage code catches an exception.
+            
+            The default implementation is to print a very simple plain text error message.  You
+            may override this to do whatever you'd like, for example redirecting to a standard
+            error page.
+            </summary>
+            <param name="context">An <see cref="T:System.Web.HttpContext" /> object that provides references to the intrinsic server objects (for example, Request, Response, Session, and Server) used to service HTTP requests. </param>
+            <param name="e">The exception that occurred.</param>
+        </member>
+        <member name="M:Azavea.Web.Page.BasePage.Page_Load(System.Object,System.EventArgs)">
+            <summary>
+            NOTE: Do not override this method.  Instead, override InteralGET, InternalPOST, etc.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Azavea.Web.Page.BasePage.OnError(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Web.UI.TemplateControl.Error"/> event.
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data. 
+                            </param>
+        </member>
+        <member name="M:Azavea.Web.Page.BasePage.HandleError(System.Web.HttpContext,System.Exception)">
+            <summary>
+            Since people override InternalOnError, don't call it directly, wrap it with
+            a try/catch so we don't get an error while handling an error.
+            </summary>
+            <param name="context">An <see cref="T:System.Web.HttpContext" /> object that provides references to the intrinsic server objects (for example, Request, Response, Session, and Server) used to service HTTP requests. </param>
+            <param name="e">The exception that occurred.</param>
+        </member>
+        <member name="T:Azavea.Web.Tests.CachedHandlerTests">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.CachedHandlerTests.TestWrongType">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.CachedHandlerTests.TestCache">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.CachedHandlerTests.TestUncaughtException">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.CachedHandlerTests.TestHandlerException">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.CachedHandlerTests.MakeContext(System.String,System.String)">
+            <exclude />
+        </member>
+        <member name="T:Azavea.Web.Tests.TestRequest">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.TestRequest.#ctor(System.String,System.String)">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.TestRequest.GetUriPath">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.TestRequest.GetQueryString">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.TestRequest.GetRawUrl">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.TestRequest.GetHttpVerbName">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.TestRequest.GetHttpVersion">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.TestRequest.GetRemoteAddress">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.TestRequest.GetRemotePort">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.TestRequest.GetLocalAddress">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.TestRequest.GetLocalPort">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.TestRequest.SendStatus(System.Int32,System.String)">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.TestRequest.SendKnownResponseHeader(System.Int32,System.String)">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.TestRequest.SendUnknownResponseHeader(System.String,System.String)">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.TestRequest.SendResponseFromMemory(System.Byte[],System.Int32)">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.TestRequest.SendResponseFromFile(System.String,System.Int64,System.Int64)">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.TestRequest.SendResponseFromFile(System.IntPtr,System.Int64,System.Int64)">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.TestRequest.FlushResponse(System.Boolean)">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.TestRequest.EndOfRequest">
+            <exclude/>
+        </member>
+        <member name="T:Azavea.Web.Tests.TestHandler">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.TestHandler.InternalGET(System.Web.HttpContext,Azavea.Web.Handler.HandlerTimedCache)">
+            <exclude/>
+        </member>
+        <member name="T:Azavea.Web.Tests.NetUtilTests">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.NetUtilTests.TestAristotle">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.NetUtilTests.TestGoogle">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.NetUtilTests.TestBadHostName">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.NetUtilTests.TestBadIp">
+            <exclude/>
+        </member>
+        <member name="M:Azavea.Web.Tests.NetUtilTests.TestNull">
+            <exclude/>
+        </member>
+        <member name="T:Azavea.Web.WebUtil">
+            <summary>
+            A utility class for common web operations
+            </summary>
+        </member>
+        <member name="M:Azavea.Web.WebUtil.GetBuildNumber">
+            <summary>
+            Gets the build number tag for the currently executing binary.
+            </summary>
+            <returns>The build number string, or null if not present.</returns>
+        </member>
+        <member name="M:Azavea.Web.WebUtil.GetBaseUrl(System.Web.HttpRequest)">
+            <summary>
+             Take a HTTP request object and returns the base url for that request. Ie.
+             http://localhost:8080/virtualdir/default.aspx
+                 => http://localhost:8080 (no slash)
+            </summary>
+            <param name="req">The HTTP request of the page or handler</param>
+            <returns>The base URL</returns>
+        </member>
+        <member name="M:Azavea.Web.WebUtil.GetApplicationUrl(System.Web.HttpRequest)">
+             <summary>
+             Take a HTTP request object and returns the base url and virtual directory 
+             for that request. Ie. 
+             http://localhost:8080/virtualdir/default.aspx
+                 => http://localhost:8080/virtualdir/
+             http://localhost
+                 => http://localhost/
+             </summary>
+            <param name="req">The HTTP request of the page or handler</param>
+            <returns>The base URL plus the virtual directory.  Will end in a shash.</returns>
+        </member>
+        <member name="M:Azavea.Web.WebUtil.VerifyUrlBasedKey(System.Web.HttpRequest,System.String,System.String)">
+            <summary>
+            Confirms whether the provided context and security token match the 
+            provided authorization key.
+            </summary>
+            <param name="request">The HTTP request object</param>
+            <param name="secToken">The security token</param>
+            <param name="authKey">The authorization key</param>
+        </member>
+        <member name="M:Azavea.Web.WebUtil.ParseIntParam(System.Web.HttpContext,System.String)">
+            <summary>
+            Gets the specified param from the querystring, and/or the form if this is
+            a POST request and parses it as an integer.  Throws a AzaveaWebArgumentException
+            if the param is either missing or not parseable.
+            </summary>
+            <param name="context">Context of the current call.</param>
+            <param name="paramName">Name of the querystring or form param to look for.</param>
+            <returns>The value as an integer.</returns>
+        </member>
+        <member name="M:Azavea.Web.WebUtil.ParseOptionalIntParam(System.Web.HttpContext,System.String,System.Int32@)">
+            <summary>
+            Gets the specified param from the querystring, and/or the form if this is
+            a POST request and parses it as an integer.  Throws a AzaveaWebArgumentException
+            if the param is present but not parseable.
+            </summary>
+            <param name="context">Context of the current call.</param>
+            <param name="paramName">Name of the querystring or form param to look for.</param>
+            <param name="retVal">The variable to set.  Will be set if we return true,
+                                 will not be modified if we return false.</param>
+            <returns>Whether the parameter was present and we set retVal or not.</returns>
+        </member>
+        <member name="M:Azavea.Web.WebUtil.ParseDoubleParam(System.Web.HttpContext,System.String)">
+            <summary>
+            Gets the specified param from the querystring, and/or the form if this is
+            a POST request and parses it as a double.  Throws a AzaveaWebArgumentException
+            if the param is either missing or not parseable.
+            </summary>
+            <param name="context">Context of the current call.</param>
+            <param name="paramName">Name of the querystring or form param to look for.</param>
+            <returns>The value as a double.</returns>
+        </member>
+        <member name="M:Azavea.Web.WebUtil.ParseOptionalDoubleParam(System.Web.HttpContext,System.String,System.Double@)">
+            <summary>
+            Gets the specified param from the querystring, and/or the form if this is
+            a POST request and parses it as a double.  Throws a AzaveaWebArgumentException
+            if the param is present but not parseable.
+            </summary>
+            <param name="context">Context of the current call.</param>
+            <param name="paramName">Name of the querystring or form param to look for.</param>
+            <param name="retVal">The variable to set.  Will be set if we return true,
+                                 will not be modified if we return false.</param>
+            <returns>Whether the parameter was present and we set retVal or not.</returns>
+        </member>
+        <member name="M:Azavea.Web.WebUtil.ParseBoolParam(System.Web.HttpContext,System.String)">
+            <summary>
+            Gets the specified param from the querystring, and/or the form if this is
+            a POST request and parses it as a boolean.  Throws a AzaveaWebArgumentException
+            if the param is either missing or not parseable.
+            </summary>
+            <param name="context">Context of the current call.</param>
+            <param name="paramName">Name of the querystring or form param to look for.</param>
+            <returns>The value as a boolean.</returns>
+        </member>
+        <member name="M:Azavea.Web.WebUtil.ParseOptionalBoolParam(System.Web.HttpContext,System.String,System.Boolean@)">
+            <summary>
+            Gets the specified param from the querystring, and/or the form if this is
+            a POST request and parses it as a boolean.  Throws a AzaveaWebArgumentException
+            if the param is present but not parseable.
+            </summary>
+            <param name="context">Context of the current call.</param>
+            <param name="paramName">Name of the querystring or form param to look for.</param>
+            <param name="retVal">The variable to set.  Will be set if we return true,
+                                 will not be modified if we return false.</param>
+            <returns>Whether the parameter was present and we set retVal or not.</returns>
+        </member>
+        <member name="M:Azavea.Web.WebUtil.ParseDateTimeParam(System.Web.HttpContext,System.String)">
+            <summary>
+            Gets the specified param from the querystring, and/or the form if this is
+            a POST request and parses it as a DateTime.  Throws a AzaveaWebArgumentException
+            if the param is either missing or not parseable.
+            </summary>
+            <param name="context">Context of the current call.</param>
+            <param name="paramName">Name of the querystring or form param to look for.</param>
+            <returns>The value as a DateTime.</returns>
+        </member>
+        <member name="M:Azavea.Web.WebUtil.ParseNullableDateTimeParam(System.Web.HttpContext,System.String)">
+            <summary>
+            Gets the specified param from the querystring, and/or the form if this is
+            a POST request and parses it as a nullable DateTime.  Throws a AzaveaWebArgumentException
+            if the param is either missing or not parseable.
+            </summary>
+            <param name="context">Context of the current call.</param>
+            <param name="paramName">Name of the querystring or form param to look for.</param>
+            <returns>The value as a DateTime.</returns>
+        </member>
+        <member name="M:Azavea.Web.WebUtil.ParseOptionalDateTimeParam(System.Web.HttpContext,System.String,System.DateTime@)">
+            <summary>
+            Gets the specified param from the querystring, and/or the form if this is
+            a POST request and parses it as a DateTime.  Throws a AzaveaWebArgumentException
+            if the param is present but not parseable.
+            </summary>
+            <param name="context">Context of the current call.</param>
+            <param name="paramName">Name of the querystring or form param to look for.</param>
+            <param name="retVal">The variable to set.  Will be set if we return true,
+                                 will not be modified if we return false.</param>
+            <returns>Whether the parameter was present and we set retVal or not.</returns>
+        </member>
+        <member name="M:Azavea.Web.WebUtil.ParseOptionalNullableDateTimeParam(System.Web.HttpContext,System.String,System.Nullable{System.DateTime}@)">
+            <summary>
+            Gets the specified param from the querystring, and/or the form if this is
+            a POST request and parses it as a null DateTime. Throws a AzaveaWebArgumentException
+            if the param is present but not parseable.  Missing or blank values will be returned as null.
+            </summary>
+            <param name="context">Context of the current call.</param>
+            <param name="paramName">Name of the querystring or form param to look for.</param>
+            <param name="retVal">The variable to set.  Will be set if we return true,
+                                 will not be modified if we return false.</param>
+            <returns>Whether the parameter was present and we set retVal or not.</returns>
+        </member>
+        <member name="M:Azavea.Web.WebUtil.ParseEnumParam``1(System.Web.HttpContext,System.String)">
+            <summary>
+            Gets the specified param from the querystring, and/or the form if this is
+            a POST request and parses it as an enum.  Throws a AzaveaWebArgumentException
+            if the param is either missing or not parseable.
+            </summary>
+            <param name="context">Context of the current call.</param>
+            <param name="paramName">Name of the querystring or form param to look for.</param>
+            <returns>The value as an enum.</returns>
+        </member>
+        <member name="M:Azavea.Web.WebUtil.ParseOptionalEnumParam``1(System.Web.HttpContext,System.String,``0@)">
+            <summary>
+            Gets the specified param from the querystring, and/or the form if this is
+            a POST request and parses it as a boolean.  Throws a AzaveaWebArgumentException
+            if the param is present but not parseable.
+            </summary>
+            <param name="context">Context of the current call.</param>
+            <param name="paramName">Name of the querystring or form param to look for.</param>
+            <param name="retVal">The variable to set.  Will be set if we return true,
+                                 will not be modified if we return false.</param>
+            <returns>Whether the parameter was present and we set retVal or not.</returns>
+        </member>
+        <member name="M:Azavea.Web.WebUtil.GetParam(System.Web.HttpContext,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Gets a parameter from the query string, or if not on the querystring
+            and this is a POST request, also checks the Form parameters.
+            If optional is true and the param is missing or blank, null is returned.
+            If optional is false and the param is missing or blank, a
+            AzaveaWebArgumentException is thrown.
+            </summary>
+            <param name="context">Context of the current call.</param>
+            <param name="paramName">Name of the querystring or form param to look for.</param>
+            <param name="optional">Whether to throw an exception if it's missing/blank.</param>
+            <param name="allowHtml">Set to true to not escape HTML.</param>
+            <returns>The parameter value, or null if missing/blank.</returns>
+        </member>
+        <member name="M:Azavea.Web.WebUtil.GetParam(System.Web.HttpContext,System.String,System.Boolean)">
+            <summary>
+            Gets a parameter from the query string, or if not on the querystring
+            and this is a POST request, also checks the Form parameters.
+            If optional is true and the param is missing or blank, null is returned.
+            If optional is false and the param is missing or blank, a
+            AzaveaWebArgumentException is thrown.
+            </summary>
+            <param name="context">Context of the current call.</param>
+            <param name="paramName">Name of the querystring or form param to look for.</param>
+            <param name="optional">Whether to throw an exception if it's missing/blank.</param>
+            <returns>The parameter value, or null if missing/blank.</returns>
+        </member>
+        <member name="M:Azavea.Web.WebUtil.GetJsonParam(System.Web.HttpContext,System.String,System.Boolean)">
+            <summary>
+            Gets a parameter from the request and deserializes the value to a dictionary presentation of the JSON string.
+            This must be a single object.  Use GetJsonArrayParam for arrays.
+            If optional is true and the param is missing or blank, null is returned.
+            If optional is false and the param is missing or blank, a
+            AzaveaWebArgumentException is thrown.
+            </summary>
+            <param name="context">Context of the current call.</param>
+            <param name="paramName">Name of the querystring or form param to look for.</param>
+            <param name="optional">Whether to throw an exception if it's missing/blank.</param>
+            <returns>A Dictionary representing the JSON object, or null if missing/blank.</returns>
+        </member>
+        <member name="M:Azavea.Web.WebUtil.GetJsonObjectArrayParam(System.Web.HttpContext,System.String,System.Boolean)">
+            <summary>
+            Gets a parameter from the request and deserializes the value to a dictionary list.
+            This must be an array.  Use GetJsonParam for single objects.
+            If optional is true and the param is missing or blank, null is returned.
+            If optional is false and the param is missing or blank, an
+            AzaveaWebArgumentException is thrown.
+            </summary>
+            <param name="context">Context of the current call.</param>
+            <param name="paramName">Name of the querystring or form param to look for.</param>
+            <param name="optional">Whether to throw an exception if it's missing/blank.</param>
+            <returns>A List of Dictionaries representing the JSON objects, or null if missing/blank.</returns>
+        </member>
+        <member name="M:Azavea.Web.WebUtil.GetJsonStringArrayParam(System.Web.HttpContext,System.String,System.Boolean)">
+            <summary>
+            Gets a parameter from the request and deserializes the value to a string list.
+            This must be an array.  Use GetJsonParam for single objects.
+            If optional is true and the param is missing or blank, null is returned.
+            If optional is false and the param is missing or blank, an
+            AzaveaWebArgumentException is thrown.
+            </summary>
+            <param name="context">Context of the current call.</param>
+            <param name="paramName">Name of the querystring or form param to look for.</param>
+            <param name="optional">Whether to throw an exception if it's missing/blank.</param>
+            <returns>A List of strings, or null if missing/blank.</returns>
+        </member>
+        <member name="M:Azavea.Web.WebUtil.ObjectToJson(System.Object)">
+            <summary>
+            Serializes an object, dictionary or list to a JSON string.
+            </summary>
+            <param name="toSerialize">Object to serialize</param>
+            <returns>JSON string.</returns>
+        </member>
+        <member name="M:Azavea.Web.WebUtil.ObjectToJson(System.Object,Newtonsoft.Json.JsonConverter)">
+            <summary>
+            Serializes an object, dictionary or list to a JSON string.
+            </summary>
+            <param name="toSerialize">Object to serialize</param>
+            <param name="converter">If you have a type needing special serialization, you may pass a converter class.</param>
+            <returns>JSON string.</returns>
+        </member>
+        <member name="M:Azavea.Web.WebUtil.JsonToObject(System.String)">
+            <summary>
+            Parses a JSON-formatted string into a dictionary.
+            Must be parsable to a single object. Use JsonToArray for arrays.
+            </summary>
+            <param name="json">JSON-formatted string.</param>
+            <returns>Dictionary representation of json object.</returns>
+        </member>
+        <member name="M:Azavea.Web.WebUtil.JsonToObjectArray(System.String)">
+            <summary>
+            Parses a JSON-formatted string into a list of dictionaries.
+            Must be parsable to an array. Use JsonToObject for single objects.
+            </summary>
+            <param name="json">JSON-formatted string.</param>
+            <returns>List of dictionaries representating a json object.</returns>
+        </member>
+        <member name="M:Azavea.Web.WebUtil.JsonToStringArray(System.String)">
+            <summary>
+            Parses a JSON-formatted string array (['str', 'str', 'str']) into a list of strings.
+            Must be parsable to an array. Use JsonToObjectArray for arrays of objects.
+            </summary>
+            <param name="json">JSON-formatted string.</param>
+            <returns>List of strings.</returns>
+        </member>
+    </members>
+</doc>

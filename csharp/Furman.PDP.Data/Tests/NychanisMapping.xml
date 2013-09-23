@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" default-lazy="false">
+  <class name="Furman.PDP.Data.Nychanis.NycTimeframe,Furman.PDP.Data" table="Nychanis_Time">
+    <property name="UID" column="TimeId"/>
+    <property name="Year" column="Year" />
+    <property name="Value" column="Value" />
+    <property name="Type" column="Type" type="string"/>
+    <property name="Name" column="Display" />
+  </class>
+  <class name="Furman.PDP.Data.Nychanis.NycGeography,Furman.PDP.Data" table="Nychanis_Geography">
+    <property name="UID" column="GeographyID"/>
+    <property name="Borough" column="Borough" />
+    <property name="SubBorough" column="SBA" />
+    <property name="ResolutionName" column="ResolutionName" />
+    <property name="ActualId" column="Number" />
+    <property name="Resolution" column="ResolutionID" type="int"/>
+    <property name="Name" column="Name" />
+    <property name="ResolutionOrder" column="ResolutionOrder" />
+    <property name="Order" column="GeographyOrder" />
+  </class>
+  <class name="Furman.PDP.Data.Nychanis.NycIndicator,Furman.PDP.Data" table="Nychanis_Indicators">
+    <property name="UID" column="IndicatorID"/>
+    <property name="Category" column="Category" />
+    <property name="FilterCatOrder" column="CategoryOrder" />
+    <property name="SubCategory" column="SubCategory"/>
+    <property name="FilterSubCatOrder" column="OrderWithinCategory" />
+    <property name="Order" column="OrderWithinSubcategory" />
+    <property name="Name" column="DisplayName" />
+    <property name="Description" column="Description" />
+    <property name="ValueType" column="Format" type="string"/>
+    <property name="NumDecimals" column="Decimals"/>
+    <property name="UseAlternateColors" column="FlipColors"/>
+    <property name="Breakpoint" column="DefaultBreakpoint" type="string"/>
+    <property name="MinYear" column="MinYear" />
+    <property name="MaxYear" column="MaxYear" />
+
+    <property name="HistoricBoroughMin" column="HistoricalBoroughMinValue" />
+    <property name="HistoricBoroughMax" column="HistoricalBoroughMaxValue" />
+    <property name="HistoricCommunityDistrictMin" column="HistoricalCDMinValue" />
+    <property name="HistoricCommunityDistrictMax" column="HistoricalCDMaxValue" />
+    <property name="HistoricCensusTractMin" column="HistoricalCensusTractMinValue" />
+    <property name="HistoricCensusTractMax" column="HistoricalCensusTractMaxValue" />
+    <property name="HistoricPolicePrecinctMin" column="HistoricalPolicePrecMinValue" />
+    <property name="HistoricPolicePrecinctMax" column="HistoricalPolicePrecMaxValue" />
+    <property name="HistoricCityMin" column="HistoricalCityMinValue" />
+    <property name="HistoricCityMax" column="HistoricalCityMaxValue" />
+    <property name="HistoricSubBoroughMin" column="HistoricalSBAMinValue" />
+    <property name="HistoricSubBoroughMax" column="HistoricalSBAMaxValue" />
+    <property name="HistoricSchoolDistrictMin" column="HistoricalSchoolDistrictMinValue" />
+    <property name="HistoricSchoolDistrictMax" column="HistoricalSchoolDistrictMaxValue" />
+
+	<!-- Commented out ntil data is provided. 
+    <property name="ContemporaryBoroughMin" column="HistoricalBoroughMinValue" />
+    <property name="ContemporaryBoroughMax" column="HistoricalBoroughMaxValue" />
+    <property name="ContemporaryCommunityDistrictMin" column="HistoricalCDMinValue" />
+    <property name="ContemporaryCommunityDistrictMax" column="HistoricalCDMaxValue" />
+    <property name="ContemporaryCensusTractMin" column="HistoricalCensusTractMinValue" />
+    <property name="ContemporaryCensusTractMax" column="HistoricalCensusTractMaxValue" />
+    <property name="ContemporaryPolicePrecinctMin" column="HistoricalPolicePrecMinValue" />
+    <property name="ContemporaryPolicePrecinctMax" column="HistoricalPolicePrecMaxValue" />
+    <property name="ContemporaryCityMin" column="HistoricalCityMinValue" />
+    <property name="ContemporaryCityMax" column="HistoricalCityMaxValue" />
+    <property name="ContemporarySubBoroughMin" column="HistoricalSBAMinValue" />
+    <property name="ContemporarySubBoroughMax" column="HistoricalSBAMaxValue" />
+    <property name="ContemporarySchoolDistrictMin" column="HistoricalSchoolDistrictMinValue" />
+    <property name="ContemporarySchoolDistrictMax" column="HistoricalSchoolDistrictMaxValue" /> -->
+  </class>
+  <class name="Furman.PDP.Data.Nychanis.NycDatum,Furman.PDP.Data" table="Nychanis_Data">
+    <property name="IndicatorId" column="IndicatorID"/>
+    <property name="GeographyId" column="GeographyID" />
+    <property name="TimeId" column="TimeID" />
+    <property name="Resolution" column="ResolutionID" type="int"/>
+    <property name="Value" column="Value" />
+    <property name="HistoricalBreakpoint" column="HistoricalBreakpoint" />
+    <property name="ContemporaryBreakpoint" column="ContemporaryBreakpoint" />
+  </class>
+  <class name="Furman.PDP.Data.Nychanis.NycResolutionForIndicator,Furman.PDP.Data" table="Nychanis_Data_Times">
+    <property name="IndicatorId" column="IndicatorID"/>
+    <property name="TimeId" column="TimeID" />
+    <property name="Resolution" column="ResolutionID" type="int"/>
+  </class>
+</hibernate-mapping>
